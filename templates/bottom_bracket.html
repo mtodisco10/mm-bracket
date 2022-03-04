@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+
+<html lang='en'>
+
+<link href="static/styles.css" rel="stylesheet">
+
+<div class="navbar">
+  <a href="/top-bracket">Top Bracket</a>
+  <a href="/bottom-bracket">Bottom Bracket</a>
+  <a href="/final-four">Final Four</a>
+  <a class="reset" href="/">Reset Picks</a>
+</div>
+
+<form action='/bottom-bracket' method='post' class="select">
+<main id="tournament">
+    <ul class="round round-1">
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value='Alabama-east_1'>1. Alabama <span>98%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top top-border" value='NC A&T-east_1'>16. NC A&T <span>2%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value='Colo St-east_2'>8. Colo St <span>84%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value='Missouri-east_2'>9. Missouri <span>16%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-east_3">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-east_3">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-east_4">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-east_4">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-east_5">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-east_5">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-east_6">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-east_6">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-east_7">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-east_7">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-east_8">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-east_8">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+    </ul>
+    <ul class="round round-2">
+      <li class="spacer">&nbsp;</li>
+      {% for n in range(1,9) %}
+        {% if n is divisibleby(2) %}
+          {% if 'east_' + n|string in game_ids %}
+            <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['east_' + n|string]}}-east_{{ game_map[n] }}">5. {{winner_dict['east_' + n|string]}} <span>55%</span></button>
+            <li class="spacer">&nbsp;</li>
+          {% else %}
+
+          <li class="game game-bottom"><span>&#8203;</span></li>
+          <li class="spacer">&nbsp;</li>
+          {% endif %}
+
+      {% else %}
+        {% if 'east_' + n|string in game_ids %}
+          <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['east_' + n|string]}}-east_{{ game_map[n] }}">5. {{winner_dict['east_' + n|string]}} <span>55%</span></button>
+          <li class="game game-spacer">&nbsp;</li>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+        <li class="game game-spacer">&nbsp;</li>
+      {% endif %}
+        {% endif %}
+      {% endfor %}
+
+    </ul>
+    <ul class="round round-3">
+      <li class="spacer">&nbsp;</li>
+      
+      {% for n in range(9,13) %}
+        {% if n is divisibleby(2) %}
+          {% if 'east_' + n|string in game_ids %}
+            <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['east_' + n|string]}}-east_{{ game_map[n] }}">5. {{winner_dict['east_' + n|string]}} <span>55%</span></button>
+            <li class="spacer">&nbsp;</li>
+          {% else %}
+
+          <li class="game game-bottom"><span>&#8203;</span></li>
+          <li class="spacer">&nbsp;</li>
+          {% endif %}
+
+      {% else %}
+        {% if 'east_' + n|string in game_ids %}
+          <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['east_' + n|string]}}-east_{{ game_map[n] }}">5. {{winner_dict['east_' + n|string]}} <span>55%</span></button>
+          <li class="game game-spacer">&nbsp;</li>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+        <li class="game game-spacer">&nbsp;</li>
+      {% endif %}
+        {% endif %}
+      {% endfor %}
+
+    </ul>
+    <ul class="round round-4">
+      <li class="spacer">&nbsp;</li>
+      
+      {% for n in range(13,15) %}
+        {% if n is divisibleby(2) %}
+          {% if 'east_' + n|string in game_ids %}
+            <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['east_' + n|string]}}-east_{{ game_map[n] }}">5. {{winner_dict['east_' + n|string]}} <span>55%</span></button>
+            <li class="spacer">&nbsp;</li>
+          {% else %}
+
+          <li class="game game-bottom"><span>&#8203;</span></li>
+          <li class="spacer">&nbsp;</li>
+          {% endif %}
+
+      {% else %}
+        {% if 'east_' + n|string in game_ids %}
+          <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['east_' + n|string]}}-east_{{ game_map[n] }}">5. {{winner_dict['east_' + n|string]}} <span>55%</span></button>
+          <li class="game game-spacer">&nbsp;</li>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+        <li class="game game-spacer">&nbsp;</li>
+      {% endif %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+
+    <!-- END OF LEFT BRACKET -->
+    <ul class="round round-5">
+      <li class="spacer">&nbsp;</li>
+      {% if 'east_15' in game_ids %}
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['east_15']}}-east_15">5. {{winner_dict['east_15']}} <span>55%</span></button>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+      {% endif %}
+
+      <li class="spacer">&nbsp;</li>
+    </ul>
+
+    <ul>
+      <!-- <div class="center-image">
+        <br>
+        <br>
+        <br>
+        <br>
+        <img src="static/mm_logo.png" alt="March Madness Logo" width="250" height="120">
+      </div> -->
+      
+    </ul>
+
+    <!-- START OF RIGHT BRACKET -->
+    <ul class="round round-5">
+      <li class="spacer">&nbsp;</li>
+      {% if 'mw_15' in game_ids %}
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['mw_15']}}-mw_15">5. {{winner_dict['mw_15']}} <span>55%</span></button>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+      {% endif %}
+
+      <li class="spacer">&nbsp;</li>
+    </ul>
+
+    <ul class="round round-4">
+      <li class="spacer">&nbsp;</li>
+      
+      {% for n in range(13,15) %}
+        {% if n is divisibleby(2) %}
+          {% if 'mw_' + n|string in game_ids %}
+            <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['mw_' + n|string]}}-mw_{{ game_map[n] }}">5. {{winner_dict['mw_' + n|string]}} <span>55%</span></button>
+            <li class="spacer">&nbsp;</li>
+          {% else %}
+
+          <li class="game game-bottom"><span>&#8203;</span></li>
+          <li class="spacer">&nbsp;</li>
+          {% endif %}
+
+      {% else %}
+        {% if 'mw_' + n|string in game_ids %}
+          <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['mw_' + n|string]}}-mw_{{ game_map[n] }}">5. {{winner_dict['mw_' + n|string]}} <span>55%</span></button>
+          <li class="game game-spacer-left">&nbsp;</li>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+        <li class="game game-spacer-left">&nbsp;</li>
+      {% endif %}
+        {% endif %}
+      {% endfor %}
+    </ul>
+    <ul class="round round-3">
+      <li class="spacer">&nbsp;</li>
+      
+      {% for n in range(9,13) %}
+        {% if n is divisibleby(2) %}
+          {% if 'mw_' + n|string in game_ids %}
+            <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['mw_' + n|string]}}-mw_{{ game_map[n] }}">5. {{winner_dict['mw_' + n|string]}} <span>55%</span></button>
+            <li class="spacer">&nbsp;</li>
+          {% else %}
+
+          <li class="game game-bottom"><span>&#8203;</span></li>
+          <li class="spacer">&nbsp;</li>
+          {% endif %}
+
+      {% else %}
+        {% if 'mw_' + n|string in game_ids %}
+          <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['mw_' + n|string]}}-mw_{{ game_map[n] }}">5. {{winner_dict['mw_' + n|string]}} <span>55%</span></button>
+          <li class="game game-spacer-left">&nbsp;</li>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+        <li class="game game-spacer-left">&nbsp;</li>
+      {% endif %}
+        {% endif %}
+      {% endfor %}
+
+    </ul>
+    <ul class="round round-2">
+      <li class="spacer">&nbsp;</li>
+      {% for n in range(1,9) %}
+        {% if n is divisibleby(2) %}
+          {% if 'mw_' + n|string in game_ids %}
+            <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['mw_' + n|string]}}-mw_{{ game_map[n] }}">5. {{winner_dict['mw_' + n|string]}} <span>55%</span></button>
+            <li class="spacer">&nbsp;</li>
+          {% else %}
+
+          <li class="game game-bottom"><span>&#8203;</span></li>
+          <li class="spacer">&nbsp;</li>
+          {% endif %}
+
+      {% else %}
+        {% if 'mw_' + n|string in game_ids %}
+          <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['mw_' + n|string]}}-mw_{{ game_map[n] }}">5. {{winner_dict['mw_' + n|string]}} <span>55%</span></button>
+          <li class="game game-spacer-left">&nbsp;</li>
+      {% else %}
+        <li class="game game-top"><span>&#8203;</span></li>
+        <li class="game game-spacer-left">&nbsp;</li>
+      {% endif %}
+        {% endif %}
+      {% endfor %}
+
+    </ul>
+    <ul class="round round-1">
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value='Alabama-mw_1'>1. Alabama <span>98%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top top-border" value='NC A&T-mw_1'>16. NC A&T <span>2%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value='Colo St-mw_2'>8. Colo St <span>84%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value='Missouri-mw_2'>9. Missouri <span>16%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-mw_3">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-mw_3">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-mw_4">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-mw_4">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-mw_5">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-mw_5">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-mw_6">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-mw_6">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-mw_7">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-mw_7">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+      
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St-mw_8">5. Oklahoma St <span>55%</span></button>
+      <li class="game game-spacer-left">&nbsp;</li>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon-mw_8">12. Oregon <span>45%</span></button>
+
+      <li class="spacer">&nbsp;</li>
+    </ul>
+</main>
+</form>
+</html> 
