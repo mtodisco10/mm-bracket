@@ -83,7 +83,19 @@ def top_predict():
 
 		game_map = {1:9, 2:9, 3:10, 4:10, 5:11, 6:11, 7:12, 8:12, 9:13, 10:13, 11:14, 12:14, 13:15, 14:15, 15:16}
 
-		return render_template('top_bracket.html', winners=winners, game_ids=game_ids, winner_dict=winner_dict, game_map=game_map)
+		prob_dict = {}
+
+		for game, winner in winner_dict.items():
+		    other_winners = {v for k, v in winner_dict.items() if v != winner}
+		    for x in other_winners:
+		        try:
+		            prob = preds.loc[(preds.TeamName_1 == winner) & (preds.TeamName_2 == x)].Pred.values[0]
+		        except:
+		            prob = preds.loc[(preds.TeamName_2 == winner) & (preds.TeamName_1 == x)].Pred.values[0]
+		        
+		        prob_dict[winner] = {x: prob}
+
+		return render_template('top_bracket_test.html', winners=winners, game_ids=game_ids, winner_dict=winner_dict, game_map=game_map, preds=preds, probs=prob_dict)
 
 @app.route('/bottom-bracket', methods=['GET', 'POST'])
 def bottom_predict():
