@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pandas as pd
-from preds import preds as preds_dict
+from pred_dict import preds as preds_dict
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
@@ -31,7 +31,7 @@ def index():
 	if request.method == 'GET':
 		db.session.query(Winners).delete()
 		db.session.commit()
-		return render_template('index.html', teams=teams)
+		return render_template('index.html', teams=teams, preds_dict=preds_dict)
 
 	elif request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')

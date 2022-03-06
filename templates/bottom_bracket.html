@@ -16,51 +16,83 @@
     <ul class="round round-1">
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value='Gonzaga||east_1||1'>1. Gonzaga <span>98%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value='Gonzaga||east_1||1'>1. Gonzaga <span>
+        {{ preds_dict['Gonzaga']['Norfolk St'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top top-border" value='Norfolk St||east_1||16'>16. Norfolk St <span>2%</span></button>
+      <button name='matchup' class="game game-bottom top top-border" value='Norfolk St||east_1||16'>16. Norfolk St <span>
+        {{ preds_dict['Norfolk St']['Gonzaga'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value='Oklahoma||east_2||8'>8. Oklahoma <span>84%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value='Oklahoma||east_2||8'>8. Oklahoma <span>
+        {{ preds_dict['Oklahoma']['Missouri'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value='Missouri||east_2||9'>9. Missouri <span>16%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value='Missouri||east_2||9'>9. Missouri <span>
+        {{ preds_dict['Missouri']['Oklahoma'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Creighton||east_3||5">5. Creighton <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Creighton||east_3||5">5. Creighton <span>
+        {{ preds_dict['Creighton']['UCSB'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="UC Santa Barbara||east_3||12">12. UC Santa Barbara <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="UCSB||east_3||12">12. UCSB <span>
+        {{ preds_dict['UCSB']['Creighton'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Virginia||east_4||4">4. Virginia <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Virginia||east_4||4">4. Virginia <span>
+        {{ preds_dict['Virginia']['Ohio'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Ohio||east_4||13">13. Ohio <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Ohio||east_4||13">13. Ohio <span>
+        {{ preds_dict['Ohio']['Virginia'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="USC||east_5||6">6. USC <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="USC||east_5||6">6. USC <span>
+        {{ preds_dict['USC']['Drake'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Drake||east_5||11">11. Drake <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Drake||east_5||11">11. Drake <span>
+        {{ preds_dict['Drake']['USC'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Kansas||east_6||3">3. Kansas <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Kansas||east_6||3">3. Kansas <span>
+        {{ preds_dict['Kansas']['E Washington'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="E Washington||east_6||14">14. E Washington <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="E Washington||east_6||14">14. E Washington <span>
+        {{ preds_dict['E Washington']['Kansas'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Oregon||east_7||7">7. Oregon <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Oregon||east_7||7">7. Oregon <span>
+        {{ preds_dict['Oregon']['VCU'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="VCU||east_7||10">10. VCU <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="VCU||east_7||10">10. VCU <span>
+        {{ preds_dict['VCU']['Oregon'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Iowa||east_8||2">2. Iowa <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Iowa||east_8||2">2. Iowa <span>
+        {{ preds_dict['Iowa']['Grand Canyon'] }}
+      </span></button>
       <li class="game game-spacer">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Grand Canyon||east_8||15">15. Grand Canyon <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Grand Canyon||east_8||15">15. Grand Canyon <span>
+        {{ preds_dict['Grand Canyon']['Iowa'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
     </ul>
@@ -277,51 +309,80 @@
     <ul class="round round-1">
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value='Baylor||mw_1||1'>1. Baylor <span>98%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value='Baylor||mw_1||1'>1. Baylor <span>
+        {{ preds_dict['Baylor']['Hartford'] }}
+      </span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top top-border" value='Hartford||mw_1||16'>16. Hartford <span>2%</span></button>
+      <button name='matchup' class="game game-bottom top top-border" value='Hartford||mw_1||16'>16. Hartford <span>
+      {{ preds_dict['Hartford']['Baylor'] }}</span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value='Colo St||mw_2||8'>8. North Carolina <span>84%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value='Colo St||mw_2||8'>8. North Carolina <span>
+        {{ preds_dict['North Carolina']['Wisconsin'] }}
+      </span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value='Missouri||mw_2||9'>9. Wisconsin <span>16%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value='Missouri||mw_2||9'>9. Wisconsin <span>
+        {{ preds_dict['Wisconsin']['North Carolina'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_3||5">5. Villanova <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_3||5">5. Villanova <span>
+        {{ preds_dict['Villanova']['Winthrop'] }}
+      </span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_3||12">12. Winthrop <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_3||12">12. Winthrop <span>
+        {{ preds_dict['Winthrop']['Villanova'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_4||4">4. Purdue <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_4||4">4. Purdue <span>
+        {{ preds_dict['Purdue']['North Texas'] }}
+      </span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_4||13">13. North Texas <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_4||13">13. North Texas <span>
+        {{ preds_dict['North Texas']['Purdue'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_5||6">6. Texas Tech <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_5||6">6. Texas Tech <span>
+        {{ preds_dict['Texas Tech']['Utah St'] }}
+      </span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_5||11">11. Utah St <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_5||11">11. Utah St <span>
+        {{ preds_dict['Utah St']['Texas Tech'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_6||3">3. Arkansas <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_6||3">3. Arkansas <span>
+        {{ preds_dict['Arkansas']['Colgate'] }}
+      </span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_6||14">14. Colgate <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_6||14">14. Colgate <span>
+        {{ preds_dict['Colgate']['Arkansas'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_7||7">7. Florida <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_7||7">7. Florida <span>
+      {{ preds_dict['Florida']['Virginia Tech'] }}</span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_7||10">10. Virginia Tech <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_7||10">10. Virginia Tech <span>
+      {{ preds_dict['Virginia Tech']['Florida'] }}</span></button>
 
       <li class="spacer">&nbsp;</li>
       
-      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_8||2">2. Ohio St <span>55%</span></button>
+      <button name='matchup' class="game game-top bottom-border" value="Oklahoma St||mw_8||2">2. Ohio St <span>
+        {{ preds_dict['Ohio St']['Oral Roberts'] }}
+      </span></button>
       <li class="game game-spacer-left">&nbsp;</li>
-      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_8||15">15. Oral Roberts <span>45%</span></button>
+      <button name='matchup' class="game game-bottom top-border" value="Oregon||mw_8||15">15. Oral Roberts <span>
+        {{ preds_dict['Oral Roberts']['Ohio St'] }}
+      </span></button>
 
       <li class="spacer">&nbsp;</li>
     </ul>
