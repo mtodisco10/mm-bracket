@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pandas as pd
+from preds import preds as preds_dict
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
@@ -13,15 +14,17 @@ class Winners(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	game_id = db.Column(db.Integer, nullable=False)
 	name = db.Column(db.String(200), nullable=False)
+	seed = db.Column(db.Integer, nullable=False)
 	created_at = db.Column(db.DateTime, default=datetime.utcnow())
 
 	#Function to return string when adding
 	def __repr__(self):
 		#return '<Name %r>' % self.id
-		return f"<id={self.id}, name={self.name}>, game_id={self.game_id}"
+		return f"<id={self.id}, name={self.name}>, game_id={self.game_id}, seed={self.seed}"
 
 preds = pd.read_csv('predictions_with_seeds.csv')
 teams = list(preds['TeamName_1'].unique())
+game_map = {1:9, 2:9, 3:10, 4:10, 5:11, 6:11, 7:12, 8:12, 9:13, 10:13, 11:14, 12:14, 13:15, 14:15, 15:16}
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -32,9 +35,10 @@ def index():
 
 	elif request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')
-		game_id = game_winner.split('-')[-1]
-		name = game_winner.split('-')[0]
-		winner = Winners(game_id=game_id, name=name)
+		game_id = game_winner.split('||')[1]
+		name = game_winner.split('||')[0]
+		seed = game_winner.split('||')[2]
+		winner = Winners(game_id=game_id, name=name, seed=seed)
 
 		#Push to Database
 		try:
@@ -50,8 +54,9 @@ def index():
 def top_predict():
 	if request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')
-		game_id = game_winner.split('-')[-1]
-		name = game_winner.split('-')[0]
+		game_id = game_winner.split('||')[1]
+		name = game_winner.split('||')[0]
+		seed = game_winner.split('||')[2]
 
 		data = Winners.query.all()
 		filtered_data = [x for x in data if x.game_id == game_id]
@@ -59,6 +64,7 @@ def top_predict():
 		if len(filtered_data) > 0:
 			winner_to_update = Winners.query.get_or_404(filtered_data[0].id)
 			winner_to_update.name = name
+			winner_to_update.seed = seed
 			try:
 				db.session.commit()
 				return redirect('/top-bracket')
@@ -68,7 +74,7 @@ def top_predict():
 		else:
 
 			#Push to Database
-			winner = Winners(game_id=game_id, name=name)
+			winner = Winners(game_id=game_id, name=name, seed=seed)
 
 			try:
 				db.session.add(winner)
@@ -80,29 +86,17 @@ def top_predict():
 		winners = Winners.query.order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
 		winner_dict = {winner.game_id: winner.name for winner in winners}
+		seed_dict = {winner.name: winner.seed for winner in winners}
 
-		game_map = {1:9, 2:9, 3:10, 4:10, 5:11, 6:11, 7:12, 8:12, 9:13, 10:13, 11:14, 12:14, 13:15, 14:15, 15:16}
-
-		prob_dict = {}
-
-		for game, winner in winner_dict.items():
-		    other_winners = {v for k, v in winner_dict.items() if v != winner}
-		    for x in other_winners:
-		        try:
-		            prob = preds.loc[(preds.TeamName_1 == winner) & (preds.TeamName_2 == x)].Pred.values[0]
-		        except:
-		            prob = preds.loc[(preds.TeamName_2 == winner) & (preds.TeamName_1 == x)].Pred.values[0]
-		        
-		        prob_dict[winner] = {x: prob}
-
-		return render_template('top_bracket_test.html', winners=winners, game_ids=game_ids, winner_dict=winner_dict, game_map=game_map, preds=preds, probs=prob_dict)
+		return render_template('top_bracket.html', winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
 
 @app.route('/bottom-bracket', methods=['GET', 'POST'])
 def bottom_predict():
 	if request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')
-		game_id = game_winner.split('-')[-1]
-		name = game_winner.split('-')[0]
+		game_id = game_winner.split('||')[1]
+		name = game_winner.split('||')[0]
+		seed = game_winner.split('||')[2]
 
 		data = Winners.query.all()
 		filtered_data = [x for x in data if x.game_id == game_id]
@@ -119,7 +113,7 @@ def bottom_predict():
 		else:
 
 			#Push to Database
-			winner = Winners(game_id=game_id, name=name)
+			winner = Winners(game_id=game_id, name=name, seed=seed)
 
 			try:
 				db.session.add(winner)
@@ -131,18 +125,18 @@ def bottom_predict():
 		winners = Winners.query.order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
 		winner_dict = {winner.game_id: winner.name for winner in winners}
+		seed_dict = {winner.name: winner.seed for winner in winners}
 
-		game_map = {1:9, 2:9, 3:10, 4:10, 5:11, 6:11, 7:12, 8:12, 9:13, 10:13, 11:14, 12:14, 13:15, 14:15, 15:16}
-
-		return render_template('bottom_bracket.html', winners=winners, game_ids=game_ids, winner_dict=winner_dict, game_map=game_map)
+		return render_template('bottom_bracket.html', winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
 
 
 @app.route('/final-four', methods=['GET', 'POST'])
 def ff_predict():
 	if request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')
-		game_id = game_winner.split('-')[-1]
-		name = game_winner.split('-')[0]
+		game_id = game_winner.split('||')[1]
+		name = game_winner.split('||')[0]
+		seed = game_winner.split('||')[2]
 
 		data = Winners.query.all()
 		filtered_data = [x for x in data if x.game_id == game_id]
@@ -159,7 +153,7 @@ def ff_predict():
 		else:
 
 			#Push to Database
-			winner = Winners(game_id=game_id, name=name)
+			winner = Winners(game_id=game_id, name=name, seed=seed)
 
 			try:
 				db.session.add(winner)
@@ -171,7 +165,8 @@ def ff_predict():
 		winners = Winners.query.order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
 		winner_dict = {winner.game_id: winner.name for winner in winners}
+		seed_dict = {winner.name: winner.seed for winner in winners}
 
-		game_map = {1:9, 2:9, 3:10, 4:10, 5:11, 6:11, 7:12, 8:12, 9:13, 10:13, 11:14, 12:14, 13:15, 14:15, 15:16}
 
-		return render_template('final_four.html', winners=winners, game_ids=game_ids, winner_dict=winner_dict, game_map=game_map)
+		return render_template('final_four.html',winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
+

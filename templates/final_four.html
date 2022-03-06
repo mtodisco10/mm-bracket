@@ -7,12 +7,10 @@
 <div class="navbar">
   <a href="/top-bracket">Top Bracket</a>
   <a href="/bottom-bracket">Bottom Bracket</a>
-  <a href="/final-four">Final Four</a>
+  <a style=background-color:#005eb8 href="/final-four">Final Four</a>
   <a class="reset" href="/">Reset Picks</a>
 </div>
 
-<br>
-<br>
 <br>
 <br>
 
@@ -22,7 +20,9 @@
       <li class="spacer">&nbsp;</li>
 
       {% if 'west_15' in game_ids %}
-        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['west_15']}}-west_16">5. {{winner_dict['west_15']}} <span>55%</span></button>
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['west_15']}}||west_16||{{seed_dict[winner_dict['west_15']]}}">{{seed_dict[winner_dict['west_15']]}}. {{winner_dict['west_15']}} <span>
+          {{ preds_dict[winner_dict['west_15']].get(winner_dict['east_15'], '') }}
+        </span></button>
         <li class="spacer">&nbsp;</li>
       {% else %}
         <li class="game game-bottom"><span>&#8203;</span></li>
@@ -32,7 +32,9 @@
       <li class="game ff-game-spacer">&nbsp;</li>
 
       {% if 'east_15' in game_ids %}
-        <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['east_15']}}-east_16">5. {{winner_dict['east_15']}} <span>55%</span></button>
+        <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['east_15']}}||east_16||{{seed_dict[winner_dict['east_15']]}}">{{seed_dict[winner_dict['east_15']]}}. {{winner_dict['east_15']}} <span>
+          {{ preds_dict[winner_dict['east_15']].get(winner_dict['west_15'], '') }}
+        </span></button>
         <li class="spacer">&nbsp;</li>
       {% else %}
         <li class="game game-bottom"><span>&#8203;</span></li>
@@ -43,9 +45,21 @@
     <ul class="round round-5">
       <li class="spacer">&nbsp;</li>
       {% if 'west_16' in game_ids %}
-        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['west_16']}}-final">5. {{winner_dict['west_16']}} <span>55%</span></button>
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['west_16']}}||final||{{seed_dict[winner_dict['west_16']]}}">{{seed_dict[winner_dict['west_16']]}}. {{winner_dict['west_16']}} <span>
+          {% if 'mw_16' in game_ids %}
+            {{ preds_dict[winner_dict['west_16']].get(winner_dict['mw_16'], '') }}
+          {% elif 'south_16' in game_ids %}
+            {{ preds_dict[winner_dict['west_16']].get(winner_dict['south_16'], '') }}
+          {% endif %}
+        </span></button>
       {% elif 'east_16' in game_ids %}
-        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['east_16']}}-final">5. {{winner_dict['east_16']}} <span>55%</span></button>
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['east_16']}}||final||{{seed_dict[winner_dict['east_16']]}}">{{seed_dict[winner_dict['east_16']]}}. {{winner_dict['east_16']}} <span>
+          {% if 'mw_16' in game_ids %}
+            {{ preds_dict[winner_dict['east_16']].get(winner_dict['mw_16'], '') }}
+          {% elif 'south_16' in game_ids %}
+            {{ preds_dict[winner_dict['east_16']].get(winner_dict['south_16'], '') }}
+          {% endif %}
+        </span></button>
       {% else %}
         <li class="game game-top"><span>&#8203;</span></li>
       {% endif %}
@@ -53,29 +67,39 @@
       <li class="spacer">&nbsp;</li>
     </ul>
 
-    <ul></ul>
-
     <ul>
-      <br>
-      <br>
-      <br>
-      <p>Champion</p>
+      <img src="/static/final-four-logo.jpeg">
+      <center>
+        <h1>Champion</h1>
       <br>
       {% if 'final' in game_ids %}
-        <p name='matchup' class="game game-top bottom-border">{{winner_dict['final']}}</p>
+        <h2 style="font-size:40px" name='matchup' class="game game-top bottom-border">{{winner_dict['final']}}</h2>
+      {% else %}
+        <h2 style="font-size:40px" name='matchup' class="game game-top bottom-border"> </h2>
       {% endif %}
+      </center>
     </ul>
-
-    <ul></ul>
 
     <!-- START OF RIGHT BRACKET -->
 
     <ul class="round round-5">
       <li class="spacer">&nbsp;</li>
       {% if 'south_16' in game_ids %}
-        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['south_16']}}-final">5. {{winner_dict['south_16']}} <span>55%</span></button>
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['south_16']}}||final||{{seed_dict[winner_dict['south_16']]}}">{{seed_dict[winner_dict['south_16']]}}. {{winner_dict['south_16']}} <span>
+          {% if 'west_16' in game_ids %}
+            {{ preds_dict[winner_dict['south_16']].get(winner_dict['west_16'], '') }}
+          {% elif 'mw_16' in game_ids %}
+            {{ preds_dict[winner_dict['south_16']].get(winner_dict['mw_16'], '') }}
+          {% endif %}
+        </span></button>
       {% elif 'mw_16' in game_ids %}
-        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['mw_16']}}-final">5. {{winner_dict['mw_16']}} <span>55%</span></button>
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['mw_16']}}||final||{{seed_dict[winner_dict['mw_16']]}}">{{seed_dict[winner_dict['mw_16']]}}. {{winner_dict['mw_16']}} <span>
+          {% if 'west_16' in game_ids %}
+            {{ preds_dict[winner_dict['mw_16']].get(winner_dict['west_16'], '') }}
+          {% elif 'east_16' in game_ids %}
+            {{ preds_dict[winner_dict['mw_16']].get(winner_dict['east_16'], '') }}
+          {% endif %}
+        </span></button>
       {% else %}
         <li class="game game-top"><span>&#8203;</span></li>
       {% endif %}
@@ -87,7 +111,9 @@
       <li class="spacer">&nbsp;</li>
 
       {% if 'south_15' in game_ids %}
-        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['south_15']}}-south_16">5. {{winner_dict['south_15']}} <span>55%</span></button>
+        <button name='matchup' class="game game-top bottom-border" value="{{winner_dict['south_15']}}||south_16||{{seed_dict[winner_dict['south_15']]}}">{{seed_dict[winner_dict['south_15']]}}. {{winner_dict['south_15']}} <span>
+          {{ preds_dict[winner_dict['south_15']].get(winner_dict['mw_15'], '') }}
+        </span></button>
         <li class="spacer">&nbsp;</li>
       {% else %}
         <li class="game game-bottom"><span>&#8203;</span></li>
@@ -97,7 +123,9 @@
       <li class="game ff-game-spacer-left">&nbsp;</li>
 
       {% if 'mw_15' in game_ids %}
-        <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['mw_15']}}-mw_16">5. {{winner_dict['mw_15']}} <span>55%</span></button>
+        <button name='matchup' class="game game-bottom top-border" value="{{winner_dict['mw_15']}}||mw_16||{{seed_dict[winner_dict['mw_15']]}}">{{seed_dict[winner_dict['mw_15']]}}. {{winner_dict['mw_15']}} <span>
+          {{ preds_dict[winner_dict['mw_15']].get(winner_dict['south_15'], '') }}
+        </span></button>
         <li class="spacer">&nbsp;</li>
       {% else %}
         <li class="game game-bottom"><span>&#8203;</span></li>
