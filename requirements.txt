@@ -98,7 +98,6 @@ requests==2.26.0
 Rtree==0.9.7
 s3transfer==0.3.3
 scikit-learn==1.0
-scipy==1.4.1
 seaborn==0.11.2
 Send2Trash==1.5.0
 Shapely==1.7.1
