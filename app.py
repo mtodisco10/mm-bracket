@@ -43,12 +43,12 @@ def index():
 		winner = Winners(game_id=game_id, name=name, seed=seed)
 
 		#Push to Database
-		try:
-			db.session.add(winner)
-			db.session.commit()
-			redirect('/predict')
-		except:
-			return 'There was an error adding a winner to the db', game_winner
+		# try:
+		db.session.add(winner)
+		db.session.commit()
+		redirect('/predict')
+		# except:
+			# return 'There was an error adding a winner to the db'
 
 		return render_template('predict.html', winners=winners)
 
@@ -78,12 +78,12 @@ def top_predict():
 			#Push to Database
 			winner = Winners(game_id=game_id, name=name, seed=seed)
 
-			try:
-				db.session.add(winner)
-				db.session.commit()
-				return redirect('/top-bracket')
-			except:
-				return 'There was an error adding a winner to the db', game_winner
+			# try:
+			db.session.add(winner)
+			db.session.commit()
+			return redirect('/top-bracket')
+			# except:
+				# return 'There was an error adding a winner to the db'
 	else:
 		winners = Winners.query.order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
@@ -122,7 +122,7 @@ def bottom_predict():
 				db.session.commit()
 				return redirect('/bottom-bracket')
 			except:
-				return 'There was an error adding a winner to the db', game_winner
+				return 'There was an error adding a winner to the db'
 	else:
 		winners = Winners.query.order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
@@ -162,7 +162,7 @@ def ff_predict():
 				db.session.commit()
 				return redirect('/final-four')
 			except:
-				return 'There was an error adding a winner to the db', game_winner
+				return 'There was an error adding a winner to the db'
 	else:
 		winners = Winners.query.order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
