@@ -93,7 +93,7 @@ def top_predict():
 			# except:
 				# return 'There was an error adding a winner to the db'
 	else:
-		winners = Winners.query.filter(Winners.session_id = session_id).order_by(Winners.created_at)
+		winners = Winners.query.filter(Winners.session_id == session_id).order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
 		winner_dict = {winner.game_id: winner.name for winner in winners}
 		seed_dict = {winner.name: winner.seed for winner in winners}
@@ -115,7 +115,7 @@ def bottom_predict():
 		filtered_data = [x for x in data if (x.game_id==game_id) & (x.session_id==session_id)]
 
 		if len(filtered_data) > 0:
-			winner_to_update = Winners.query.filter(Winners.session_id = session_id).get_or_404(filtered_data[0].id)
+			winner_to_update = Winners.query.filter(Winners.session_id == session_id).get_or_404(filtered_data[0].id)
 			winner_to_update.name = name
 			try:
 				db.session.commit()
@@ -135,7 +135,7 @@ def bottom_predict():
 			except:
 				return 'There was an error adding a winner to the db'
 	else:
-		winners = Winners.query.filter(Winners.session_id = session_id).order_by(Winners.created_at)
+		winners = Winners.query.filter(Winners.session_id == session_id).order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
 		winner_dict = {winner.game_id: winner.name for winner in winners}
 		seed_dict = {winner.name: winner.seed for winner in winners}
@@ -158,7 +158,7 @@ def ff_predict():
 		filtered_data = [x for x in data if (x.game_id == game_id) & (x.session_id==session_id)]
 
 		if len(filtered_data) > 0:
-			winner_to_update = Winners.query.filter(Winners.session_id = session_id).get_or_404(filtered_data[0].id)
+			winner_to_update = Winners.query.filter(Winners.session_id == session_id).get_or_404(filtered_data[0].id)
 			winner_to_update.name = name
 			try:
 				db.session.commit()
@@ -178,7 +178,7 @@ def ff_predict():
 			except:
 				return 'There was an error adding a winner to the db'
 	else:
-		winners = Winners.query.filter(Winners.session_id = session_id).order_by(Winners.created_at)
+		winners = Winners.query.filter(Winners.session_id == session_id).order_by(Winners.created_at)
 		game_ids = [winner.game_id for winner in winners]
 		winner_dict = {winner.game_id: winner.name for winner in winners}
 		seed_dict = {winner.name: winner.seed for winner in winners}
