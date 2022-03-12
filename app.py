@@ -7,7 +7,7 @@ from uuid import uuid4
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://wdpmcvprybxywo:7e31cc9e29030ff19373e2f61e12c3690866d39d826a37e4e0b1e63a2342cf3d@ec2-54-211-174-60.compute-1.amazonaws.com:5432/db0sdeodruv9mq'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nlavwjdwgcxeyg:0d2d99ddbae0886aec120f4239222d15aee55f2b2cf48f4a19d663c443fe6c49@ec2-54-158-26-89.compute-1.amazonaws.com:5432/d50p3glj8p4gtu'
 #Initialize the database
 db = SQLAlchemy(app)
 
