@@ -35,6 +35,8 @@ def index():
 
 	session['session_id'] = str(uuid4())
 
+	session_id = session.get('session_id')
+
 	if request.method == 'GET':
 		db.session.query(Winners).delete()
 		db.session.commit()
@@ -59,6 +61,8 @@ def index():
 
 @app.route('/top-bracket', methods=['GET', 'POST'])
 def top_predict():
+	session_id = session.get('session_id')
+
 	if request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')
 		game_id = game_winner.split('||')[1]
@@ -79,8 +83,6 @@ def top_predict():
 			except:
 				return "There was a problem updating"
 		else:
-			session_id = session.get('session_id')
-
 			#Push to Database
 			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
@@ -100,6 +102,9 @@ def top_predict():
 
 @app.route('/bottom-bracket', methods=['GET', 'POST'])
 def bottom_predict():
+
+	session_id = session.get('session_id')
+
 	if request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')
 		game_id = game_winner.split('||')[1]
@@ -119,8 +124,6 @@ def bottom_predict():
 			except:
 				return "There was a problem updating"
 		else:
-
-			session_id = session.get('session_id')
 
 			#Push to Database
 			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
@@ -142,6 +145,9 @@ def bottom_predict():
 
 @app.route('/final-four', methods=['GET', 'POST'])
 def ff_predict():
+
+	session_id = session.get('session_id')
+
 	if request.method == 'POST':
 		game_winner = request.form.get('matchup', 'world')
 		game_id = game_winner.split('||')[1]
@@ -161,7 +167,6 @@ def ff_predict():
 			except:
 				return "There was a problem updating"
 		else:
-			session_id = session.get('session_id')
 
 			#Push to Database
 			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
