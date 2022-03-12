@@ -7,7 +7,7 @@ from pred_dict import preds as preds_dict
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://pkqssrpovzodsl:500ea466e132cd901e6975cb8b132e6d50d579ab63632eb4c6a45a7ef4734c79@ec2-52-70-186-184.compute-1.amazonaws.com:5432/d1jt5somgbmeum'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://lfpjaawgabssxh:3f8318c65eaed4dd6faf18b447a24b9e6bedd43ea110cf10d5f1d7050530f932@ec2-54-211-174-60.compute-1.amazonaws.com:5432/dfvnddr8pidtpr'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://wdpmcvprybxywo:7e31cc9e29030ff19373e2f61e12c3690866d39d826a37e4e0b1e63a2342cf3d@ec2-54-211-174-60.compute-1.amazonaws.com:5432/db0sdeodruv9mq'
 #Initialize the database
 db = SQLAlchemy(app)
 
