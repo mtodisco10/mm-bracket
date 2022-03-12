@@ -9,8 +9,6 @@ conn = psycopg2.connect(
     host='ec2-54-158-26-89.compute-1.amazonaws.com',
     port= '5432'
 )
-
-conn = psycopg2.connect("dbname= user= password=")
 cur = con.cursor()
 
 for row in cur.execute('select * from winners'):
