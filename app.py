@@ -48,7 +48,7 @@ def index():
 			db.session.commit()
 			redirect('/predict')
 		except:
-			return 'There was an error adding a winner to the db'
+			return 'There was an error adding a winner to the db' game_winner
 
 		return render_template('predict.html', winners=winners)
 
