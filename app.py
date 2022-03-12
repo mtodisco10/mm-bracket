@@ -14,7 +14,7 @@ db = SQLAlchemy(app)
 #Create db model
 class Winners(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	game_id = db.Column(db.Integer, nullable=False)
+	game_id = db.Column(db.String(10), nullable=False)
 	name = db.Column(db.String(200), nullable=False)
 	seed = db.Column(db.Integer, nullable=False)
 	created_at = db.Column(db.DateTime, default=datetime.utcnow())
