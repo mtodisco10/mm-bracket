@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pandas as pd
@@ -10,8 +10,6 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nlavwjdwgcxeyg:0d2d99ddbae0886aec120f4239222d15aee55f2b2cf48f4a19d663c443fe6c49@ec2-54-158-26-89.compute-1.amazonaws.com:5432/d50p3glj8p4gtu'
 #Initialize the database
 db = SQLAlchemy(app)
-
-session_id = str(uuid4())
 
 #Create db model
 class Winners(db.Model):
@@ -33,6 +31,9 @@ game_map = {1:9, 2:9, 3:10, 4:10, 5:11, 6:11, 7:12, 8:12, 9:13, 10:13, 11:14, 12
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+
+	session['session_id'] = str(uuid4())
+
 	if request.method == 'GET':
 		db.session.query(Winners).delete()
 		db.session.commit()
@@ -77,6 +78,7 @@ def top_predict():
 			except:
 				return "There was a problem updating"
 		else:
+			session_id = session.get('session_id')
 
 			#Push to Database
 			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
@@ -117,6 +119,8 @@ def bottom_predict():
 				return "There was a problem updating"
 		else:
 
+			session_id = session.get('session_id')
+
 			#Push to Database
 			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
@@ -156,7 +160,8 @@ def ff_predict():
 			except:
 				return "There was a problem updating"
 		else:
-
+			session_id = session.get('session_id')
+			
 			#Push to Database
 			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
