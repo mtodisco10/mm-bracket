@@ -3,17 +3,20 @@ from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 import pandas as pd
 from pred_dict import preds as preds_dict
+from uuid import uuid4
 
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://pkqssrpovzodsl:500ea466e132cd901e6975cb8b132e6d50d579ab63632eb4c6a45a7ef4734c79@ec2-52-70-186-184.compute-1.amazonaws.com:5432/d1jt5somgbmeum'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://wdpmcvprybxywo:7e31cc9e29030ff19373e2f61e12c3690866d39d826a37e4e0b1e63a2342cf3d@ec2-54-211-174-60.compute-1.amazonaws.com:5432/db0sdeodruv9mq'
 #Initialize the database
 db = SQLAlchemy(app)
 
+session_id = str(uuid4())
+
 #Create db model
 class Winners(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
+	session_id = db.Column(db.String(200), nullable=False)
 	game_id = db.Column(db.String(10), nullable=False)
 	name = db.Column(db.String(200), nullable=False)
 	seed = db.Column(db.Integer, nullable=False)
@@ -40,7 +43,7 @@ def index():
 		game_id = game_winner.split('||')[1]
 		name = game_winner.split('||')[0]
 		seed = game_winner.split('||')[2]
-		winner = Winners(game_id=game_id, name=name, seed=seed)
+		winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
 		#Push to Database
 		# try:
@@ -61,7 +64,7 @@ def top_predict():
 		seed = game_winner.split('||')[2]
 
 		data = Winners.query.all()
-		filtered_data = [x for x in data if x.game_id == game_id]
+		filtered_data = [x for x in data if (x.game_id==game_id) & (x.session_id==session_id)]
 
 		if len(filtered_data) > 0:
 			winner_to_update = Winners.query.get_or_404(filtered_data[0].id)
@@ -76,7 +79,7 @@ def top_predict():
 		else:
 
 			#Push to Database
-			winner = Winners(game_id=game_id, name=name, seed=seed)
+			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
 			# try:
 			db.session.add(winner)
@@ -90,7 +93,7 @@ def top_predict():
 		winner_dict = {winner.game_id: winner.name for winner in winners}
 		seed_dict = {winner.name: winner.seed for winner in winners}
 
-		return render_template('top_bracket.html', winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
+		return render_template('top_bracket.html', session_id=session_id, winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
 
 @app.route('/bottom-bracket', methods=['GET', 'POST'])
 def bottom_predict():
@@ -101,7 +104,7 @@ def bottom_predict():
 		seed = game_winner.split('||')[2]
 
 		data = Winners.query.all()
-		filtered_data = [x for x in data if x.game_id == game_id]
+		filtered_data = [x for x in data if (x.game_id==game_id) & (x.session_id==session_id)]
 
 		if len(filtered_data) > 0:
 			winner_to_update = Winners.query.get_or_404(filtered_data[0].id)
@@ -115,7 +118,7 @@ def bottom_predict():
 		else:
 
 			#Push to Database
-			winner = Winners(game_id=game_id, name=name, seed=seed)
+			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
 			try:
 				db.session.add(winner)
@@ -129,7 +132,7 @@ def bottom_predict():
 		winner_dict = {winner.game_id: winner.name for winner in winners}
 		seed_dict = {winner.name: winner.seed for winner in winners}
 
-		return render_template('bottom_bracket.html', winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
+		return render_template('bottom_bracket.html', session_id=session_id, winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
 
 
 @app.route('/final-four', methods=['GET', 'POST'])
@@ -141,7 +144,7 @@ def ff_predict():
 		seed = game_winner.split('||')[2]
 
 		data = Winners.query.all()
-		filtered_data = [x for x in data if x.game_id == game_id]
+		filtered_data = [x for x in data if (x.game_id == game_id) & (x.session_id==session_id)]
 
 		if len(filtered_data) > 0:
 			winner_to_update = Winners.query.get_or_404(filtered_data[0].id)
@@ -155,7 +158,7 @@ def ff_predict():
 		else:
 
 			#Push to Database
-			winner = Winners(game_id=game_id, name=name, seed=seed)
+			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
 			try:
 				db.session.add(winner)
@@ -170,5 +173,5 @@ def ff_predict():
 		seed_dict = {winner.name: winner.seed for winner in winners}
 
 
-		return render_template('final_four.html',winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
+		return render_template('final_four.html', session_id=session_id, winners=winners, game_ids=game_ids, seed_dict=seed_dict, winner_dict=winner_dict, game_map=game_map, preds_dict=preds_dict)
 
