@@ -8,7 +8,8 @@ from uuid import uuid4
 app = Flask(__name__)
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nlavwjdwgcxeyg:0d2d99ddbae0886aec120f4239222d15aee55f2b2cf48f4a19d663c443fe6c49@ec2-54-158-26-89.compute-1.amazonaws.com:5432/d50p3glj8p4gtu'
-#Initialize the database
+app.secret_key = '_wqe8nFuwV8sP*ijEn46kJVb'
+
 db = SQLAlchemy(app)
 
 #Create db model
@@ -161,7 +162,7 @@ def ff_predict():
 				return "There was a problem updating"
 		else:
 			session_id = session.get('session_id')
-			
+
 			#Push to Database
 			winner = Winners(session_id=session_id, game_id=game_id, name=name, seed=seed)
 
