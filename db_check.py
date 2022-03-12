@@ -1,5 +1,5 @@
 #import sqlite3
-#import psycopg2
+import psycopg2
 
 #con = sqlite3.connect('winners.db')
 conn = psycopg2.connect(
