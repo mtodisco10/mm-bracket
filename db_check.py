@@ -12,8 +12,10 @@ con = psycopg2.connect(
 
 cur = con.cursor()
 
-for row in cur.execute('select * from winners'):
-	print(row)
+cur.execute('SELECT * FROM pg_catalog.pg_tables')
+
+# for row in cur.execute('select * from winners'):
+# 	print(row)
 
 # cursor =  cur.execute('select * from winners')
 # names = list(map(lambda x: x[0], cursor.description))
