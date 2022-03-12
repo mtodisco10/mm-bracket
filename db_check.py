@@ -12,7 +12,8 @@ con = psycopg2.connect(
 
 cur = con.cursor()
 
-cur.execute('SELECT * FROM pg_catalog.pg_tables')
+for row in cur.execute('SELECT * FROM pg_catalog.pg_tables'):
+	print(row)
 
 # for row in cur.execute('select * from winners'):
 # 	print(row)
