@@ -115,8 +115,10 @@ def bottom_predict():
 		filtered_data = [x for x in data if (x.game_id==game_id) & (x.session_id==session_id)]
 
 		if len(filtered_data) > 0:
-			winner_to_update = Winners.query.filter(Winners.session_id == session_id).get_or_404(filtered_data[0].id)
+			#winner_to_update = Winners.query.filter(Winners.session_id == session_id).get_or_404(filtered_data[0].id)
+			winner_to_update = Winners.query.get_or_404(filtered_data[0].id)
 			winner_to_update.name = name
+			winner_to_update.seed = seed
 			try:
 				db.session.commit()
 				return redirect('/bottom-bracket')
@@ -158,8 +160,10 @@ def ff_predict():
 		filtered_data = [x for x in data if (x.game_id == game_id) & (x.session_id==session_id)]
 
 		if len(filtered_data) > 0:
-			winner_to_update = Winners.query.filter(Winners.session_id == session_id).get_or_404(filtered_data[0].id)
+			#winner_to_update = Winners.query.filter(Winners.session_id == session_id).get_or_404(filtered_data[0].id)
+			winner_to_update = Winners.query.get_or_404(filtered_data[0].id)
 			winner_to_update.name = name
+			winner_to_update.seed = seed
 			try:
 				db.session.commit()
 				return redirect('/final-four')
