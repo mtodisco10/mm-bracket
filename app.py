@@ -6,9 +6,10 @@ from pred_dict_2022 import preds as preds_dict
 from uuid import uuid4
 
 app = Flask(__name__)
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nlavwjdwgcxeyg:0d2d99ddbae0886aec120f4239222d15aee55f2b2cf48f4a19d663c443fe6c49@ec2-54-158-26-89.compute-1.amazonaws.com:5432/d50p3glj8p4gtu'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://cbznbzdwmiytrq:900b3078c5e923a597e16924b47a0cc031b7ec91a9d8fc5fdc9d27ad20c084f3@ec2-3-219-63-251.compute-1.amazonaws.com:5432/d8j5j8obr43fn'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///winners.db'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://nlavwjdwgcxeyg:0d2d99ddbae0886aec120f4239222d15aee55f2b2cf48f4a19d663c443fe6c49@ec2-54-158-26-89.compute-1.amazonaws.com:5432/d50p3glj8p4gtu'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://cbznbzdwmiytrq:900b3078c5e923a597e16924b47a0cc031b7ec91a9d8fc5fdc9d27ad20c084f3@ec2-3-219-63-251.compute-1.amazonaws.com:5432/d8j5j8obr43fn'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://vpixypqoboosjm:e1c0c65c60a1283f5653cc083030bf17404d7e566581aaee049af6993d455076@ec2-3-93-160-246.compute-1.amazonaws.com:5432/dfslcphqli9gv0'
 app.secret_key = '_wqe8nFuwV8sP*ijEn46kJVb'
 
 db = SQLAlchemy(app)
